@@ -1,0 +1,110 @@
+﻿@model Bao.Models.News
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/Category.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>News Record</h2>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add News</button><br /><br />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Avartar
+                    </th>
+                    <th>
+                        Sapo
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Createdate
+                    </th>
+                    <th>
+                        Category_Id
+                    </th>
+                    <th>
+                        ModifyDate
+                    </th>
+                    <th>
+                        Active
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dissmiss="modal"><span aria-hidden="true">&times;</span></button>*@
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Category</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+
+                        @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @placeholder = "Id" })
+                        @Html.LabelFor(model => model.Name)
+                        @Html.TextAreaFor(model => model.Name, new { @class = "form-control", @placeholder = "Title" })
+
+                        @Html.LabelFor(model => model.Avartar)
+                        @Html.TextBoxFor(model => model.Avartar, new { @class = "form-control", @placeholder = "file", type = "file" })
+
+                        @Html.LabelFor(model => model.Sapo)
+                        @Html.TextAreaFor(model => model.Sapo, new { @class = "form-control", @placeholder = "Sapo" })
+
+                        @Html.LabelFor(model => model.Description)
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @placeholder = "Description" })
+
+                        <label for="Category">Loại tin tức</label>
+                        <select class="form-control" id="Category_Id" name="Category_Id">
+                        </select>
+
+                        @Html.HiddenFor(model => model.Createdate)
+
+                        @Html.HiddenFor(model => model.ModifyDate)
+
+                        <label for="Active">Trạng thái</label>
+                        @Html.EditorFor(model => model.Active, new { @class = "form-control" })
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
